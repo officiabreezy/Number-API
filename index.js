@@ -10,6 +10,10 @@ app.use(cors());
 
 app.use("/api/v1", classifyRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Hello Developer from number-API server..!');
+});
+
 app.listen(PORT, () => {
     console.log(`listening on http://localhost:${PORT}`);
 });
