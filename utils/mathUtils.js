@@ -30,10 +30,13 @@ const isArmstrong = (num) => {
     return sum === num;
 };
 
-const digitSum = (num) => Math.abs(num) 
+const digitSum = (num) =>{
+    const sum = Math.abs(num) 
     .toString()
     .split("")
     .reduce((sum, digit) => sum + parseInt(digit), 0);
+    return num < 0 ? -sum : sum
+};
 
 
 const getFunFact = async (num) => {
