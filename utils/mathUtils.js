@@ -3,7 +3,7 @@ const axios = require('axios');
 const isPrime = (num) =>{
    if (num < 2) 
       return false;
-   for (let i = 0; i < num; i++){
+   for (let i = 2; i < num; i++){
      if (num % i === 0)
         return false;
    }
@@ -23,13 +23,18 @@ const isPerfect = (num) => {
 };
 
 const isArmstrong = (num) => {
+    if(num < 0) return false;
     const digits = num.toString().split("").map(Number);
     const power = digits.length;
     const sum = digits.reduce((acc, digit) => acc + Math.pow(digit, power), 0);
     return sum === num;
 };
 
-const digitSum = (num) => num.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0);
+const digitSum = (num) => Math.abs(num) 
+    .toString()
+    .split("")
+    .reduce((sum, digit) => sum + parseInt(digit), 0);
+
 
 const getFunFact = async (num) => {
     try {
@@ -45,7 +50,7 @@ const classifyNumber = async (num) => {
     const perfect = isPerfect(num);
     const armstrong = isArmstrong(num);
     const odd = num % 2 !== 0;  
-    const digiSumValue = digitSum(num);
+    const digitSumValue = digitSum(num);
     const funFact = await getFunFact(num);
 
     let properties  = [];
@@ -57,7 +62,7 @@ const classifyNumber = async (num) => {
         is_prime: prime,
         is_perfect: perfect,
         properties,
-        digit_sum: digiSumValue,
+        digit_sum: digitSumValue,
         fun_fact: funFact,
     };
 };
